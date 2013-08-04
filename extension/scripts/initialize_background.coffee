@@ -16,3 +16,7 @@ browserActions.listen()
 
 omnibox = new BH.Lib.Omnibox()
 omnibox.listen()
+
+chrome.commands.onCommand.addListener (command) ->
+  chrome.tabs.executeScript(null, {file: "scripts/views/add_view.js"})
+  chrome.tabs.insertCSS(null, {file: "styles/chrome-bootstrap.css"})
