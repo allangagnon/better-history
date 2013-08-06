@@ -12,8 +12,8 @@ container.innerHTML = """
       <div class="action-area">
         <div class="action-area-right">
           <div class="button-strip">y
-            <button>Cancel</button>
-            <button>Add to Collections(s)</button>
+            <button id="BH-cancel">Cancel</button>
+            <button id="BH-add">Add to Collections(s)</button>
           </div>
         </div>
       </div>
@@ -21,9 +21,19 @@ container.innerHTML = """
   </div>
 """
 
-
 body.appendChild(container)
 
 setTimeout(->
   document.getElementById("BH-add-to-collection").className = "overlay"
+
+  console.log localStorage
+  document.getElementById('BH-cancel').addEventListener('click', ->
+    body.removeChild(container)
+  , false)
+
+  document.getElementById('BH-add').addEventListener('click', ->
+    notification = webkitNotifications.createNotification null, 'Page tagged', 'stored it!'
+    notification.show()
+    body.removeChild(container)
+  , false)
 , 0)
