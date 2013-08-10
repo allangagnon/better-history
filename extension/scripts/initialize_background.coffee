@@ -18,5 +18,12 @@ omnibox = new BH.Lib.Omnibox()
 omnibox.listen()
 
 chrome.commands.onCommand.addListener (command) ->
+  # Insert a infobar (DEV only)
+  chrome.tabs.query {active: true, currentWindow: true}, (tabs) ->
+    chrome.infobars.show
+      tabId: tabs[0].id
+      path: 'infobar.html'
+
+  # Insert a modal in the active page
   chrome.tabs.executeScript(null, {file: "scripts/views/add_view.js"})
   chrome.tabs.insertCSS(null, {file: "styles/chrome-bootstrap.css"})
